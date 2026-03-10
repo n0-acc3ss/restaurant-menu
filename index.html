@@ -39,8 +39,9 @@
   .lang-toggle button { padding:5px 13px; border:none; background:transparent; cursor:pointer; color:var(--text-muted); font-family:'DM Sans',sans-serif; font-size:11px; font-weight:500; letter-spacing:.04em; transition:all .2s; }
   .lang-toggle button.active { background:var(--teal); color:white; }
 
-  .btn-staff { background:var(--crimson); color:white; border:none; padding:9px 16px; border-radius:4px; font-family:'Sarabun',sans-serif; font-size:13px; font-weight:500; cursor:pointer; display:flex; align-items:center; gap:6px; transition:background .2s; white-space:nowrap; }
+  .btn-staff { background:var(--crimson); color:white; border:none; padding:7px 14px 6px; border-radius:4px; font-family:'Sarabun',sans-serif; font-size:13px; font-weight:500; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:1px; transition:background .2s; white-space:nowrap; line-height:1.2; }
   .btn-staff:hover { background:#5C1520; }
+  .btn-staff-sub { font-family:'DM Sans',sans-serif; font-size:9px; font-weight:400; opacity:0.85; letter-spacing:0.03em; }
 
   .search-bar { padding:8px 28px 10px; border-top:1px solid var(--border-light); }
   .search-input-wrap { position:relative; max-width:500px; margin:0 auto; }
@@ -80,7 +81,6 @@
   .menu-item { background:var(--warm-white); border:1px solid var(--border-light); border-radius:6px; padding:13px 14px; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; transition:box-shadow .18s, border-color .18s; }
   .menu-item:hover { border-color:var(--teal-light); box-shadow:0 3px 14px var(--shadow); }
   .item-left { flex:1; min-width:0; }
-  .item-number { font-family:'DM Sans',sans-serif; font-size:9px; font-weight:400; color:var(--text-muted); margin-bottom:2px; letter-spacing:.05em; }
   .item-name-th { font-family:'Sarabun',sans-serif; font-size:14px; font-weight:500; color:var(--text-dark); line-height:1.4; }
   /* English name: DM Sans — clean, geometric, very easy to read */
   .item-name-en { font-family:'DM Sans',sans-serif; font-size:11.5px; font-weight:300; color:var(--text-muted); margin-top:2px; line-height:1.35; }
@@ -136,7 +136,19 @@
   .btn-call-staff-main:hover { background:#5C1520; }
   .btn-clear-cart { width:100%; background:none; border:1px solid var(--border); color:var(--text-muted); padding:7px; border-radius:4px; font-family:'DM Sans',sans-serif; font-size:12px; cursor:pointer; }
 
-  /* Toast */
+  /* ── PORTION PICKER inside remark modal ── */
+  .modal-portion-wrap { margin-bottom:14px; }
+  .portion-options { display:flex; flex-wrap:wrap; gap:7px; margin-top:7px; }
+  .portion-btn { font-family:'DM Sans',sans-serif; font-size:12px; font-weight:500; padding:6px 14px; border-radius:4px; border:1.5px solid var(--border); background:var(--cream); color:var(--text-dark); cursor:pointer; transition:all .15s; }
+  .portion-btn:hover { border-color:var(--teal); color:var(--teal); }
+  .portion-btn.selected { background:var(--teal); color:white; border-color:var(--teal); }
+
+  /* ── TABLE NUMBER input in cart footer ── */
+  .table-input-wrap { margin-bottom:10px; }
+  .table-input-label { font-family:'DM Sans',sans-serif; font-size:11px; font-weight:500; letter-spacing:.08em; color:var(--text-muted); text-transform:uppercase; margin-bottom:5px; display:block; }
+  .table-input { width:100%; border:1.5px solid var(--border); border-radius:4px; padding:9px 12px; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; background:var(--cream); color:var(--text-dark); outline:none; transition:border-color .2s; text-align:center; letter-spacing:.05em; }
+  .table-input:focus { border-color:var(--teal); }
+  .table-input::placeholder { color:var(--text-muted); font-weight:400; font-size:13px; }
   .toast { position:fixed; bottom:84px; left:50%; transform:translateX(-50%) translateY(14px); background:var(--teal-dark); color:white; padding:10px 22px; border-radius:50px; font-family:'DM Sans',sans-serif; font-size:13px; opacity:0; transition:all .28s; z-index:400; pointer-events:none; white-space:nowrap; }
   .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
   .hidden { display:none !important; }
@@ -174,7 +186,8 @@
         <button onclick="setLang('en')" id="btn-en">EN</button>
       </div>
       <button class="btn-staff" onclick="callStaff()">
-        🔔 <span class="btn-label" data-th="เรียกพนักงาน" data-en="Call Staff">เรียกพนักงาน</span>
+        <span>🔔 <span class="btn-label" data-th="เรียกพนักงาน" data-en="Call Staff">เรียกพนักงาน</span></span>
+        <span class="btn-staff-sub" data-th="แตะเพื่อเรียกพนักงาน" data-en="Tap to call staff">แตะเพื่อเรียกพนักงาน</span>
       </button>
     </div>
   </div>
@@ -188,7 +201,7 @@
 
 <!-- INFO STRIP -->
 <div class="restaurant-info">
-  <div class="info-item">📞 <span>064 569 4482</span></div>
+  <div class="info-item">📞 <a href="tel:0645694482" style="color:rgba(255,255,255,.82); text-decoration:none;">064 569 4482</a></div>
   <div class="info-item">📍 <a href="https://maps.app.goo.gl/JiZZKFzJgRo2KYFt7" target="_blank">สโมสรนายทหารอากาศ บางซื่อ — View on Maps</a></div>
 </div>
 
@@ -342,6 +355,10 @@
       <span data-th="รวมทั้งหมด" data-en="Total">รวมทั้งหมด</span>
       <span id="cartTotal">฿0</span>
     </div>
+    <div class="table-input-wrap">
+      <label class="table-input-label" for="tableNumber">หมายเลขโต๊ะ / Table Number</label>
+      <input class="table-input" type="text" id="tableNumber" placeholder="เช่น 5, A3, VIP1 …" maxlength="10" inputmode="text" autocomplete="off">
+    </div>
     <button class="btn-call-staff-main" onclick="callStaffWithOrder()">🔔 เรียกพนักงาน</button>
     <button class="btn-clear-cart" onclick="clearCart()">ล้างรายการทั้งหมด</button>
   </div>
@@ -350,8 +367,15 @@
 <!-- REMARK MODAL -->
 <div class="modal-overlay" id="remarkModal">
   <div class="modal-box">
-    <div class="modal-title">หมายเหตุ</div>
+    <div class="modal-title">เพิ่มในรายการ</div>
     <div class="modal-item-name" id="modalItemName"></div>
+
+    <!-- Portion picker — shown only for multi-price items -->
+    <div class="modal-portion-wrap" id="modalPortionWrap" style="display:none">
+      <div class="modal-label">เลือกขนาด / ราคา &nbsp;·&nbsp; Select Size</div>
+      <div class="portion-options" id="portionOptions"></div>
+    </div>
+
     <div class="modal-label">หมายเหตุพิเศษ / Special Note</div>
     <textarea class="modal-textarea" id="remarkText" placeholder="เช่น ไม่เผ็ด, ไม่ใส่ผักชี... / e.g. not spicy, no coriander..."></textarea>
     <div class="modal-note">* 1 หมายเหตุต่อ 1 รายการ &nbsp;/&nbsp; One note per item</div>
@@ -559,20 +583,21 @@ function renderAll() {
 function card(item, num) {
   const primary = currentLang === 'en' ? (item.en || item.th) : item.th;
   const secondary = currentLang === 'en' ? item.th : (item.en || '');
-  const portion = item.portion ? `<span class="item-portion">📦 ${item.portion}</span>` : '';
+  const portionBadge = item.portion ? `<span class="item-portion">📦 ${item.portion}</span>` : '';
   const thSafe = item.th.replace(/'/g,"\\'");
+  const portionSafe = (item.portion || '').replace(/'/g,"\\'");
+  const hasVariants = item.price.includes('/');
   return `<div class="menu-item" data-th="${item.th}" data-en="${item.en||item.th}">
     <div class="item-left">
-      <div class="item-number">No.${String(num).padStart(2,'0')}</div>
       <div class="item-name-th">${primary}</div>
       ${secondary ? `<div class="item-name-en">${secondary}</div>` : ''}
-      ${portion}
+      ${portionBadge}
     </div>
     <div class="item-right">
       <div class="item-price">${item.price}<span class="currency"> ฿</span></div>
       <div class="item-actions">
-        <button class="btn-remark" onclick="openRemark('${item.id}','${thSafe}','${item.price}')">📝</button>
-        <button class="btn-add" onclick="addToCart('${item.id}','${thSafe}','${item.price}','')">+</button>
+        <button class="btn-remark" onclick="openRemark('${item.id}','${thSafe}','${item.price}','${portionSafe}')">📝</button>
+        <button class="btn-add" onclick="${hasVariants ? `openRemark('${item.id}','${thSafe}','${item.price}','${portionSafe}')` : `addToCart('${item.id}','${thSafe}','${item.price}','')`}">+</button>
       </div>
     </div>
   </div>`;
@@ -607,24 +632,79 @@ function filterMenu(q) {
 
 function goTo(id) { document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
 
-function openRemark(id, name, price) {
-  pendingItem = {id, name, price};
+function openRemark(id, name, price, portion) {
+  pendingItem = {id, name, price, portion};
   document.getElementById('modalItemName').textContent = name;
   document.getElementById('remarkText').value = '';
+
+  const portionWrap = document.getElementById('modalPortionWrap');
+  const portionOpts = document.getElementById('portionOptions');
+
+  // Build portion picker if item has multiple prices
+  const prices = price.split('/').map(p => p.trim());
+  const portions = portion ? portion.split('/').map(p => p.trim()) : [];
+
+  if (prices.length > 1) {
+    portionWrap.style.display = 'block';
+    portionOpts.innerHTML = prices.map((p, i) => {
+      const label = portions[i] ? `${portions[i]} — ฿${p}` : `฿${p}`;
+      return `<button class="portion-btn${i===0?' selected':''}" onclick="selectPortion(this,'${p}')">${label}</button>`;
+    }).join('');
+    // Default to first
+    pendingItem.selectedPrice = prices[0];
+  } else {
+    portionWrap.style.display = 'none';
+    portionOpts.innerHTML = '';
+    pendingItem.selectedPrice = price;
+  }
+
   document.getElementById('remarkModal').classList.add('open');
 }
+
+function selectPortion(btn, price) {
+  document.querySelectorAll('.portion-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  pendingItem.selectedPrice = price;
+}
+
 function closeModal() { document.getElementById('remarkModal').classList.remove('open'); pendingItem = null; }
+
 function confirmAddToCart() {
   if (!pendingItem) return;
-  addToCart(pendingItem.id, pendingItem.name, pendingItem.price, document.getElementById('remarkText').value.trim());
+  const remark = document.getElementById('remarkText').value.trim();
+  const chosenPrice = pendingItem.selectedPrice || pendingItem.price;
+  // Build a label for the selected portion (e.g. "ถ้วย" or "กลาง")
+  const prices = pendingItem.price.split('/').map(p => p.trim());
+  const portions = pendingItem.portion ? pendingItem.portion.split('/').map(p => p.trim()) : [];
+  const idx = prices.indexOf(chosenPrice);
+  const portionLabel = portions[idx] || (prices.length > 1 ? `฿${chosenPrice}` : '');
+  addToCart(pendingItem.id, pendingItem.name, chosenPrice, remark, portionLabel);
   closeModal();
 }
 
-function addToCart(id, name, price, remark) {
-  const p = parseFloat(price.toString().split('/')[0].replace(/[^0-9.]/g,''));
-  cart.push({id, name, price:p, priceLabel:price, remark});
+function addToCart(id, name, price, remark, portionLabel) {
+  const p = parseFloat(price.toString().replace(/[^0-9.]/g,''));
+  cart.push({id, name, price:p, portionLabel: portionLabel||'', remark});
   updateCart();
   showToast(currentLang==='en' ? `Added: ${name}` : `เพิ่ม: ${name}`);
+}
+
+function callStaffWithOrder() {
+  const tableInput = document.getElementById('tableNumber');
+  const table = tableInput ? tableInput.value.trim() : '';
+  if (!table) {
+    tableInput.focus();
+    tableInput.style.borderColor = 'var(--crimson)';
+    tableInput.placeholder = '⚠ กรุณาระบุหมายเลขโต๊ะก่อน';
+    setTimeout(() => {
+      tableInput.style.borderColor = '';
+      tableInput.placeholder = 'เช่น 5, A3, VIP1 …';
+    }, 2500);
+    return;
+  }
+  tableInput.style.borderColor = '';
+  showToast(currentLang==='en' ? `🔔 Table ${table} — Staff notified!` : `🔔 โต๊ะ ${table} — เรียกพนักงานแล้ว!`);
+  toggleCart();
 }
 
 function updateCart() {
@@ -642,6 +722,7 @@ function updateCart() {
     <div class="cart-item">
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
+        ${item.portionLabel ? `<div class="cart-item-remark">📦 ${item.portionLabel}</div>` : ''}
         ${item.remark ? `<div class="cart-item-remark">📝 ${item.remark}</div>` : ''}
       </div>
       <div class="cart-item-right">
@@ -655,7 +736,6 @@ function updateCart() {
 function removeFromCart(i) { cart.splice(i,1); updateCart(); }
 function clearCart() { cart=[]; updateCart(); }
 function toggleCart() { document.getElementById('cartDrawer').classList.toggle('open'); }
-function callStaffWithOrder() { showToast(currentLang==='en'?'🔔 Staff notified!':'🔔 เรียกพนักงานแล้ว!'); toggleCart(); }
 function callStaff() { showToast(currentLang==='en'?'🔔 Staff is on the way!':'🔔 กำลังเรียกพนักงาน...'); }
 
 function showToast(msg) {
