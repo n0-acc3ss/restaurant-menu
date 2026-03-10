@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silver Bell Restaurant — Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;500&family=Sarabun:wght@300;400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F8F5EF;
+    --warm-white: #FDFBF7;
+    --teal: #2A6B6E;
+    --teal-light: #3D8A8D;
+    --teal-dark: #1A4A4C;
+    --crimson: #7A1E2E;
+    --gold: #B8972A;
+    --gold-light: #D4B050;
+    --text-dark: #1C1C1C;
+    --text-muted: #7A7A7A;
+    --border: #D8CFC0;
+    --border-light: #EDE7DC;
+    --shadow: rgba(26,74,76,0.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Sarabun',sans-serif; background:var(--cream); color:var(--text-dark); min-height:100vh; }
+
+  /* ── HEADER ── */
+  header { background:var(--warm-white); border-bottom:2px solid var(--teal); position:sticky; top:0; z-index:100; box-shadow:0 2px 20px var(--shadow); }
+  .header-top { display:flex; align-items:center; justify-content:space-between; padding:12px 28px; gap:16px; }
+  .logo-area { display:flex; align-items:center; gap:12px; }
+  .logo-img { width:52px; height:52px; object-fit:contain; border-radius:50%; border:1.5px solid var(--border); background:var(--cream); padding:2px; flex-shrink:0; }
+  .brand-name { line-height:1.1; }
+  .brand-name .main { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:600; color:var(--teal-dark); letter-spacing:.04em; display:block; }
+  .brand-name .sub { font-family:'Cinzel',serif; font-size:9px; color:var(--gold); letter-spacing:.22em; text-transform:uppercase; }
+  .header-actions { display:flex; align-items:center; gap:10px; }
+
+  .lang-toggle { display:flex; background:var(--cream); border:1.5px solid var(--border); border-radius:20px; overflow:hidden; }
+  .lang-toggle button { padding:5px 13px; border:none; background:transparent; cursor:pointer; color:var(--text-muted); font-family:'DM Sans',sans-serif; font-size:11px; font-weight:500; letter-spacing:.04em; transition:all .2s; }
+  .lang-toggle button.active { background:var(--teal); color:white; }
+
+  .btn-staff { background:var(--crimson); color:white; border:none; padding:9px 16px; border-radius:4px; font-family:'Sarabun',sans-serif; font-size:13px; font-weight:500; cursor:pointer; display:flex; align-items:center; gap:6px; transition:background .2s; white-space:nowrap; }
+  .btn-staff:hover { background:#5C1520; }
+
+  .search-bar { padding:8px 28px 10px; border-top:1px solid var(--border-light); }
+  .search-input-wrap { position:relative; max-width:500px; margin:0 auto; }
+  .search-input-wrap input { width:100%; padding:8px 14px 8px 36px; border:1.5px solid var(--border); border-radius:4px; background:var(--cream); font-family:'DM Sans',sans-serif; font-size:13px; color:var(--text-dark); outline:none; transition:border-color .2s; }
+  .search-input-wrap input:focus { border-color:var(--teal); }
+  .search-input-wrap input::placeholder { color:var(--text-muted); }
+  .search-icon { position:absolute; left:11px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:14px; pointer-events:none; }
+
+  /* ── INFO STRIP ── */
+  .restaurant-info { background:var(--teal-dark); color:rgba(255,255,255,.82); display:flex; justify-content:center; align-items:center; gap:28px; padding:9px 28px; font-family:'DM Sans',sans-serif; font-size:12px; flex-wrap:wrap; }
+  .info-item { display:flex; align-items:center; gap:6px; }
+  .info-item a { color:var(--gold-light); text-decoration:none; }
+  .info-item a:hover { text-decoration:underline; }
+
+  /* ── CATEGORY OVERVIEW ── */
+  .category-overview { background:var(--warm-white); padding:22px 28px 24px; border-bottom:1px solid var(--border); }
+  .cat-label { font-family:'Cinzel',serif; font-size:10px; letter-spacing:.2em; color:var(--text-muted); text-align:center; margin-bottom:16px; text-transform:uppercase; }
+  .cat-grid { display:grid; grid-template-columns:repeat(9,1fr); gap:8px; max-width:900px; margin:0 auto; }
+  .cat-card { border:1.5px solid var(--border); border-radius:6px; padding:11px 6px 9px; text-align:center; cursor:pointer; transition:all .18s; background:var(--cream); text-decoration:none; display:block; }
+  .cat-card:hover { border-color:var(--teal); background:var(--teal); }
+  .cat-card .cat-icon { font-size:17px; margin-bottom:4px; display:block; }
+  .cat-card .cat-th { font-family:'Sarabun',sans-serif; font-size:10.5px; font-weight:500; color:var(--text-dark); display:block; line-height:1.3; }
+  .cat-card .cat-en { font-family:'DM Sans',sans-serif; font-size:9px; color:var(--text-muted); display:block; margin-top:2px; line-height:1.3; }
+  .cat-card:hover .cat-th, .cat-card:hover .cat-en { color:white; }
+
+  /* ── MAIN ── */
+  main { max-width:960px; margin:0 auto; padding:30px 20px 70px; }
+  .menu-section { margin-bottom:44px; scroll-margin-top:158px; }
+  .section-header { display:flex; align-items:center; gap:14px; margin-bottom:6px; padding-bottom:10px; border-bottom:2px solid var(--teal); }
+  .section-icon { font-size:22px; }
+  .section-title-th { font-family:'Cormorant Garamond',serif; font-size:25px; font-weight:600; color:var(--teal-dark); }
+  .section-title-en { font-family:'DM Sans',sans-serif; font-size:10px; font-weight:500; letter-spacing:.18em; color:var(--gold); text-transform:uppercase; margin-top:1px; }
+  .ornament-divider { text-align:center; color:var(--gold); font-size:14px; letter-spacing:10px; margin:6px 0 16px; opacity:.4; }
+
+  /* Items */
+  .items-grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+  .menu-item { background:var(--warm-white); border:1px solid var(--border-light); border-radius:6px; padding:13px 14px; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; transition:box-shadow .18s, border-color .18s; }
+  .menu-item:hover { border-color:var(--teal-light); box-shadow:0 3px 14px var(--shadow); }
+  .item-left { flex:1; min-width:0; }
+  .item-number { font-family:'DM Sans',sans-serif; font-size:9px; font-weight:400; color:var(--text-muted); margin-bottom:2px; letter-spacing:.05em; }
+  .item-name-th { font-family:'Sarabun',sans-serif; font-size:14px; font-weight:500; color:var(--text-dark); line-height:1.4; }
+  /* English name: DM Sans — clean, geometric, very easy to read */
+  .item-name-en { font-family:'DM Sans',sans-serif; font-size:11.5px; font-weight:300; color:var(--text-muted); margin-top:2px; line-height:1.35; }
+  .item-portion { display:inline-block; margin-top:5px; font-family:'DM Sans',sans-serif; font-size:10px; font-weight:400; color:var(--teal); background:rgba(42,107,110,.07); padding:2px 7px; border-radius:3px; }
+  .item-right { display:flex; flex-direction:column; align-items:flex-end; gap:7px; flex-shrink:0; }
+  /* Price: DM Sans — numerals are beautifully legible */
+  .item-price { font-family:'DM Sans',sans-serif; font-size:15px; font-weight:600; color:var(--teal-dark); white-space:nowrap; letter-spacing:.01em; }
+  .item-price .currency { font-size:11px; font-weight:400; color:var(--text-muted); margin-left:1px; }
+  .item-actions { display:flex; align-items:center; gap:5px; }
+  .btn-remark { background:none; border:1px solid var(--border); color:var(--text-muted); border-radius:3px; padding:4px 7px; font-size:11px; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all .15s; }
+  .btn-remark:hover { border-color:var(--gold); color:var(--gold); }
+  .btn-add { background:var(--teal); color:white; border:none; border-radius:3px; width:26px; height:26px; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s; flex-shrink:0; line-height:1; }
+  .btn-add:hover { background:var(--teal-dark); }
+
+  /* ── MODAL ── */
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.42); z-index:200; align-items:center; justify-content:center; padding:20px; }
+  .modal-overlay.open { display:flex; }
+  .modal-box { background:var(--warm-white); border-radius:8px; padding:26px; max-width:400px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,.18); border-top:4px solid var(--teal); }
+  .modal-title { font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--teal-dark); margin-bottom:4px; }
+  .modal-item-name { font-family:'DM Sans',sans-serif; font-size:13px; color:var(--text-muted); margin-bottom:16px; }
+  .modal-label { font-family:'DM Sans',sans-serif; font-size:11px; font-weight:500; letter-spacing:.1em; color:var(--text-muted); margin-bottom:7px; text-transform:uppercase; }
+  .modal-textarea { width:100%; border:1.5px solid var(--border); border-radius:4px; padding:9px; font-family:'DM Sans',sans-serif; font-size:13px; resize:none; height:76px; background:var(--cream); color:var(--text-dark); outline:none; }
+  .modal-textarea:focus { border-color:var(--teal); }
+  .modal-note { font-family:'DM Sans',sans-serif; font-size:11px; color:var(--text-muted); margin-top:5px; }
+  .modal-actions { display:flex; gap:8px; margin-top:18px; justify-content:flex-end; }
+  .btn-modal-cancel { background:none; border:1.5px solid var(--border); color:var(--text-muted); padding:8px 18px; border-radius:4px; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:13px; }
+  .btn-modal-confirm { background:var(--teal); color:white; border:none; padding:8px 18px; border-radius:4px; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; }
+
+  /* ── CART FAB ── */
+  .cart-fab { position:fixed; bottom:22px; right:22px; background:var(--teal-dark); color:white; border:none; border-radius:50px; padding:12px 18px; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; display:flex; align-items:center; gap:8px; box-shadow:0 6px 24px rgba(26,74,76,.32); transition:all .2s; z-index:90; }
+  .cart-fab:hover { background:var(--teal); transform:translateY(-2px); }
+  .cart-badge { background:var(--crimson); color:white; border-radius:50%; width:20px; height:20px; font-family:'DM Sans',sans-serif; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+
+  /* ── CART DRAWER ── */
+  .cart-drawer { position:fixed; right:-400px; top:0; bottom:0; width:370px; max-width:100vw; background:var(--warm-white); box-shadow:-4px 0 30px rgba(0,0,0,.12); z-index:300; transition:right .28s ease; display:flex; flex-direction:column; border-left:3px solid var(--teal); }
+  .cart-drawer.open { right:0; }
+  .cart-header { padding:18px 18px 14px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  .cart-header-title { font-family:'Cormorant Garamond',serif; font-size:21px; color:var(--teal-dark); }
+  .cart-close { background:none; border:none; font-size:20px; cursor:pointer; color:var(--text-muted); }
+  .cart-body { flex:1; overflow-y:auto; padding:14px 18px; }
+  .cart-empty { text-align:center; padding:40px 20px; color:var(--text-muted); font-family:'DM Sans',sans-serif; font-size:14px; }
+  .cart-item { display:flex; justify-content:space-between; align-items:flex-start; padding:11px 0; border-bottom:1px solid var(--border-light); gap:8px; }
+  .cart-item-info { flex:1; }
+  .cart-item-name { font-family:'Sarabun',sans-serif; font-size:13px; font-weight:500; color:var(--text-dark); }
+  .cart-item-remark { font-family:'DM Sans',sans-serif; font-size:11px; color:var(--text-muted); margin-top:2px; }
+  .cart-item-right { display:flex; align-items:center; gap:8px; }
+  .cart-item-price { font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600; color:var(--teal-dark); min-width:52px; text-align:right; }
+  .cart-footer { padding:14px 18px; border-top:2px solid var(--teal); }
+  .cart-total { display:flex; justify-content:space-between; margin-bottom:12px; font-size:17px; font-weight:600; color:var(--teal-dark); }
+  .cart-total span:first-child { font-family:'Sarabun',sans-serif; }
+  .cart-total span:last-child { font-family:'DM Sans',sans-serif; }
+  .btn-call-staff-main { width:100%; background:var(--crimson); color:white; border:none; padding:12px; border-radius:4px; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; cursor:pointer; transition:background .2s; margin-bottom:7px; }
+  .btn-call-staff-main:hover { background:#5C1520; }
+  .btn-clear-cart { width:100%; background:none; border:1px solid var(--border); color:var(--text-muted); padding:7px; border-radius:4px; font-family:'DM Sans',sans-serif; font-size:12px; cursor:pointer; }
+
+  /* Toast */
+  .toast { position:fixed; bottom:84px; left:50%; transform:translateX(-50%) translateY(14px); background:var(--teal-dark); color:white; padding:10px 22px; border-radius:50px; font-family:'DM Sans',sans-serif; font-size:13px; opacity:0; transition:all .28s; z-index:400; pointer-events:none; white-space:nowrap; }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+  .hidden { display:none !important; }
+  .no-results { text-align:center; padding:40px; color:var(--text-muted); font-family:'DM Sans',sans-serif; font-size:16px; }
+
+  /* Responsive */
+  @media (max-width:780px) { .cat-grid { grid-template-columns:repeat(5,1fr); } }
+  @media (max-width:520px) {
+    .cat-grid { grid-template-columns:repeat(3,1fr); }
+    .items-grid { grid-template-columns:1fr; }
+    .header-top { padding:10px 14px; }
+    .brand-name .main { font-size:18px; }
+    .search-bar { padding:8px 14px 10px; }
+    .category-overview { padding:18px 14px 20px; }
+    .btn-staff .btn-label { display:none; }
+    .restaurant-info { gap:14px; font-size:11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div class="logo-area">
+      <img class="logo-img" src="https://i.ibb.co/LzBWvZK1/Logo-Silver-Bell.webp" alt="Silver Bell Restaurant">
+      <div class="brand-name">
+        <span class="main">Silver Bell</span>
+        <span class="sub">Restaurant</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="lang-toggle">
+        <button class="active" onclick="setLang('th')" id="btn-th">ไทย</button>
+        <button onclick="setLang('en')" id="btn-en">EN</button>
+      </div>
+      <button class="btn-staff" onclick="callStaff()">
+        🔔 <span class="btn-label" data-th="เรียกพนักงาน" data-en="Call Staff">เรียกพนักงาน</span>
+      </button>
+    </div>
+  </div>
+  <div class="search-bar">
+    <div class="search-input-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="ค้นหาเมนู... / Search menu..." oninput="filterMenu(this.value)">
+    </div>
+  </div>
+</header>
+
+<!-- INFO STRIP -->
+<div class="restaurant-info">
+  <div class="info-item">📞 <span>064 569 4482</span></div>
+  <div class="info-item">📍 <a href="https://maps.app.goo.gl/JiZZKFzJgRo2KYFt7" target="_blank">สโมสรนายทหารอากาศ บางซื่อ — View on Maps</a></div>
+</div>
+
+<!-- CATEGORY OVERVIEW -->
+<div class="category-overview">
+  <div class="cat-label" data-th="หมวดหมู่อาหาร" data-en="MENU CATEGORIES">หมวดหมู่อาหาร</div>
+  <div class="cat-grid">
+    <a class="cat-card" href="#sec-recommended" onclick="goTo('sec-recommended');return false;">
+      <span class="cat-icon">⭐</span>
+      <span class="cat-th">เมนูแนะนำ</span><span class="cat-en">Recommended</span>
+    </a>
+    <a class="cat-card" href="#sec-snack" onclick="goTo('sec-snack');return false;">
+      <span class="cat-icon">🍗</span>
+      <span class="cat-th">กับแกล้ม</span><span class="cat-en">Appetizers</span>
+    </a>
+    <a class="cat-card" href="#sec-soup" onclick="goTo('sec-soup');return false;">
+      <span class="cat-icon">🍲</span>
+      <span class="cat-th">ต้มยำ แกงจืด</span><span class="cat-en">Tom Yum & Soups</span>
+    </a>
+    <a class="cat-card" href="#sec-salad" onclick="goTo('sec-salad');return false;">
+      <span class="cat-icon">🥗</span>
+      <span class="cat-th">เมนูยำ</span><span class="cat-en">Spicy Salads</span>
+    </a>
+    <a class="cat-card" href="#sec-stirfry" onclick="goTo('sec-stirfry');return false;">
+      <span class="cat-icon">🥘</span>
+      <span class="cat-th">แกง/ผัด/ผัดเผ็ด</span><span class="cat-en">Stir-fries & Curries</span>
+    </a>
+    <a class="cat-card" href="#sec-vegstirfry" onclick="goTo('sec-vegstirfry');return false;">
+      <span class="cat-icon">🥬</span>
+      <span class="cat-th">ผัดผัก</span><span class="cat-en">Vegetable Stir-fries</span>
+    </a>
+    <a class="cat-card" href="#sec-isaan" onclick="goTo('sec-isaan');return false;">
+      <span class="cat-icon">🌶️</span>
+      <span class="cat-th">อีสานแซ่บนัว</span><span class="cat-en">Isan Menu</span>
+    </a>
+    <a class="cat-card" href="#sec-seafood" onclick="goTo('sec-seafood');return false;">
+      <span class="cat-icon">🦐</span>
+      <span class="cat-th">อาหารทะเล</span><span class="cat-en">Seafood Menu</span>
+    </a>
+    <a class="cat-card" href="#sec-drinks" onclick="goTo('sec-drinks');return false;">
+      <span class="cat-icon">🥤</span>
+      <span class="cat-th">เครื่องดื่ม</span><span class="cat-en">Drink Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <div class="menu-section" id="sec-recommended">
+    <div class="section-header"><span class="section-icon">⭐</span><div>
+      <div class="section-title-th" data-th="เมนูแนะนำ" data-en="เมนูแนะนำ">เมนูแนะนำ</div>
+      <div class="section-title-en">RECOMMENDED</div>
+    </div></div>
+    <div class="ornament-divider">— ✦ —</div>
+    <div class="items-grid" id="grid-recommended"></div>
+  </div>
+
+  <div class="menu-section" id="sec-snack">
+    <div class="section-header"><span class="section-icon">🍗</span><div>
+      <div class="section-title-th" data-th="เมนูกับแกล้ม" data-en="เมนูกับแกล้ม">เมนูกับแกล้ม</div>
+      <div class="section-title-en">APPETIZERS</div>
+    </div></div>
+    <div class="ornament-divider">— ✦ —</div>
+    <div class="items-grid" id="grid-snack"></div>
+  </div>
+
+  <div class="menu-section" id="sec-soup">
+    <div class="section-header"><span class="section-icon">🍲</span><div>
+      <div class="section-title-th" data-th="เมนูต้มยำ แกงจืด" data-en="เมนูต้มยำ แกงจืด">เมนูต้มยำ แกงจืด</div>
+      <div class="section-title-en">TOM YUM & SOUPS</div>
+    </div></div>
+    <div class="ornament-divider">— ✦ —</div>
+    <div class="items-grid" id="grid-soup"></div>
+  </div>
+
+  <div class="menu-section" id="sec-salad">
+    <div class="section-header"><span class="section-icon">🥗</span><div>
+      <div class="section-title-th" data-th="เมนูยำ" data-en="เมนูยำ">เมนูยำ</div>
+      <div class="section-title-en">SPICY SALADS</div>
+    </div></div>
+    <div class="ornament-divider">— ✦ —</div>
+    <div class="items-grid" id="grid-salad"></div>
+  </div>
+
+  <div class="menu-section" id="sec-stirfry">
+    <div class="section-header"><span class="section-icon">🥘</span><div>
+      <div class="section-title-th" data-th="เมนูแกง / ผัด / ผัดเผ็ด" data-en="เมนูแกง / ผัด / ผัดเผ็ด">เมนูแกง / ผัด / ผัดเผ็ด</div>
+      <div class="section-title-en">STIR-FRIES & CURRIES</div>
+    </div></div>
+    <div class="ornament-divider">— ✦ —</div>
+    <div class="items-grid" id="grid-stirfry"></div>
+  </div>
+
+  <div class="menu-section" id="sec-vegstirfry">
+    <div class="section-header"><span class="section-icon">🥬</span><div>
+      <div class="section-title-th" data-th="เมนูผัดผัก" data-en="เมนูผัดผัก">เมนูผัดผัก</div>
+      <div class="section-title-en">VEGETABLE STIR-FRIES</div>
+    </div></div>
+    <div class="ornament-divider">— ✦ —</div>
+    <div class="items-grid" id="grid-vegstirfry"></div>
+  </div>
+
+  <div class="menu-section" id="sec-isaan">
+    <div class="section-header"><span class="section-icon">🌶️</span><div>
+      <div class="section-title-th" data-th="เมนูอีสานแซ่บนัว" data-en="เมนูอีสานแซ่บนัว">เมนูอีสานแซ่บนัว</div>
+      <div class="section-title-en">ISAN MENU</div>
+    </div></div>
+    <div class="ornament-divider">— ✦ —</div>
+    <div class="items-grid" id="grid-isaan"></div>
+  </div>
+
+  <div class="menu-section" id="sec-seafood">
+    <div class="section-header"><span class="section-icon">🦐</span><div>
+      <div class="section-title-th" data-th="เมนูอาหารทะเล" data-en="เมนูอาหารทะเล">เมนูอาหารทะเล</div>
+      <div class="section-title-en">SEAFOOD MENU</div>
+    </div></div>
+    <div class="ornament-divider">— ✦ —</div>
+    <div class="items-grid" id="grid-seafood"></div>
+  </div>
+
+  <div class="menu-section" id="sec-drinks">
+    <div class="section-header"><span class="section-icon">🥤</span><div>
+      <div class="section-title-th" data-th="เมนูเครื่องดื่ม" data-en="เมนูเครื่องดื่ม">เมนูเครื่องดื่ม</div>
+      <div class="section-title-en">DRINK MENU</div>
+    </div></div>
+    <div class="ornament-divider">— ✦ —</div>
+    <div class="items-grid" id="grid-drinks"></div>
+  </div>
+
+  <div class="no-results hidden" id="noResults">ไม่พบเมนูที่ค้นหา / No items found</div>
+</main>
+
+<!-- CART FAB -->
+<button class="cart-fab" onclick="toggleCart()" id="cartFab" style="display:none">
+  🛒 <span data-th="รายการ" data-en="Items">รายการ</span>
+  <span class="cart-badge" id="cartCount">0</span>
+</button>
+
+<!-- CART DRAWER -->
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <div class="cart-header-title" data-th="รายการที่สั่ง" data-en="My Order">รายการที่สั่ง</div>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty">ยังไม่มีรายการ</div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span data-th="รวมทั้งหมด" data-en="Total">รวมทั้งหมด</span>
+      <span id="cartTotal">฿0</span>
+    </div>
+    <button class="btn-call-staff-main" onclick="callStaffWithOrder()">🔔 เรียกพนักงาน</button>
+    <button class="btn-clear-cart" onclick="clearCart()">ล้างรายการทั้งหมด</button>
+  </div>
+</div>
+
+<!-- REMARK MODAL -->
+<div class="modal-overlay" id="remarkModal">
+  <div class="modal-box">
+    <div class="modal-title">หมายเหตุ</div>
+    <div class="modal-item-name" id="modalItemName"></div>
+    <div class="modal-label">หมายเหตุพิเศษ / Special Note</div>
+    <textarea class="modal-textarea" id="remarkText" placeholder="เช่น ไม่เผ็ด, ไม่ใส่ผักชี... / e.g. not spicy, no coriander..."></textarea>
+    <div class="modal-note">* 1 หมายเหตุต่อ 1 รายการ &nbsp;/&nbsp; One note per item</div>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="closeModal()">ยกเลิก / Cancel</button>
+      <button class="btn-modal-confirm" onclick="confirmAddToCart()">เพิ่มในรายการ</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+const menuData = {
+  recommended: [
+    {id:'re01',th:'ขาหมูเยอรมัน',en:'German-style Pork Knuckle',price:'390'},
+    {id:'re02',th:'ปลากระพงทอดน้ำปลา',en:'Fried Barramundi with Fish Sauce',price:'350 / 380',portion:'ราคาตามน้ำหนัก'},
+    {id:'re03',th:'ปลากระพงนึ่งมะนาว',en:'Steamed Barramundi with Lime',price:'380'},
+    {id:'re04',th:'ปลากระพงสามรส',en:'Barramundi Three-Flavour Sauce',price:'380'},
+    {id:'re05',th:'เมี่ยงปลากระพงทอด',en:'Fried Barramundi Miang',price:'380'},
+    {id:'re06',th:'เมี่ยงปลาทับทิมทอด',en:'Fried Red Tilapia Miang',price:'350 / 380',portion:'ราคาตามน้ำหนัก'},
+    {id:'re07',th:'แหนมซี่โครงหมู',en:'Fermented Pork Ribs',price:'140'},
+    {id:'re08',th:'หมูฮ้อง',en:'Braised Pork (Hong Style)',price:'180'},
+    {id:'re09',th:'ไข่ตุ๋นทะเล',en:'Steamed Seafood Egg',price:'150 / 220 / 320',portion:'ถ้วย / หม้อไฟกลาง / หม้อไฟใหญ่'},
+    {id:'re10',th:'กุ้งทอดซอสมะขาม',en:'Fried Shrimp with Tamarind Sauce',price:'250'},
+    {id:'re11',th:'แกงเหลืองปลากระพงยอดมะพร้าว (หม้อไฟ)',en:'Yellow Curry Barramundi with Coconut Shoot (Hot Pot)',price:'380'},
+    {id:'re12',th:'เหลาปลาแซลมอนปลาร้าแซ่บนัว',en:'Spicy Salmon with Fermented Fish Sauce',price:'290'},
+    {id:'re13',th:'สามชั้นทอดกะปิ',en:'Fried Pork Belly with Shrimp Paste',price:'140'},
+    {id:'re14',th:'สามชั้นผัดกะปิ',en:'Stir-fried Pork Belly with Shrimp Paste',price:'140'},
+    {id:'re15',th:'น้ำพริกกะปิกุ้งสด / ผักลวก',en:'Shrimp Paste Dip with Fresh Shrimp / Blanched Veg',price:'140'},
+    {id:'re16',th:'สลัดผลไม้กุ้งทอดกระทงทอง',en:'Fruit Salad with Fried Shrimp in Golden Cups',price:'280'},
+    {id:'re17',th:'เนื้อตุ๋น (หม้อไฟเล็ก)',en:'Braised Beef Small Hot Pot',price:'180'},
+    {id:'re18',th:'ยำแมงกระพรุนน้ำมันงา',en:'Jellyfish Salad with Sesame Oil',price:'150'},
+  ],
+  snack: [
+    {id:'sn01',th:'เนื้อย่างจิ้มแจ่ว',en:'Grilled Beef with Jaew Sauce',price:'150'},
+    {id:'sn02',th:'ปีกไก่ทอดสูตร 1 (กรอบ นุ่ม)',en:'Fried Chicken Wings Formula 1 (Crispy-Soft)',price:'130'},
+    {id:'sn03',th:'ปีกไก่ทอดสูตร 2 (กรอบ)',en:'Fried Chicken Wings Formula 2 (Crispy)',price:'130'},
+    {id:'sn04',th:'ไก่ทอดเกลือ',en:'Salt Fried Chicken',price:'130'},
+    {id:'sn05',th:'แหนมซี่โครงหมู',en:'Fermented Pork Ribs',price:'140'},
+    {id:'sn06',th:'แหนมสไลด์ ทรงเครื่อง',en:'Sliced Fermented Pork with Garnish',price:'130'},
+    {id:'sn07',th:'ยำเม็ดมะม่วงหิมพานต์',en:'Cashew Nut Salad',price:'120'},
+    {id:'sn08',th:'เฟรนซ์ฟรายส์',en:'French Fries',price:'90'},
+    {id:'sn09',th:'Onion Ring',en:'Onion Ring',price:'90'},
+    {id:'sn10',th:'ปอเปี๊ยะกุ้งสด',en:'Fresh Shrimp Spring Roll',price:'160'},
+    {id:'sn11',th:'ปอเปี๊ยะรังนก',en:"Bird's Nest Spring Roll",price:'130'},
+    {id:'sn12',th:'สามชั้นทอดกะปิ',en:'Fried Pork Belly with Shrimp Paste',price:'140'},
+    {id:'sn13',th:'สามชั้นทอดน้ำปลา',en:'Fried Pork Belly with Fish Sauce',price:'140'},
+    {id:'sn14',th:'เนื้อแดดเดียว',en:'Sun-dried Beef',price:'150'},
+    {id:'sn15',th:'หมูแดดเดียว',en:'Sun-dried Pork',price:'130'},
+    {id:'sn16',th:'ไก่สามอย่าง',en:'Three-style Chicken',price:'120'},
+    {id:'sn17',th:'ไก่คั่วตะไคร้พริกขี้หนูสวน',en:"Chicken Stir-fried with Lemongrass & Bird's Eye Chili",price:'140'},
+    {id:'sn18',th:'ยำกากหมูระฆังเงิน',en:'Crispy Pork Skin Salad',price:'130'},
+    {id:'sn19',th:'ออเดิร์ฟ 4 อย่าง',en:"Hors d'oeuvre Set (4 kinds)",price:'220'},
+    {id:'sn20',th:'คางกุ้งทอดกระเทียม',en:'Fried Shrimp Heads with Garlic',price:'120'},
+  ],
+  soup: [
+    {id:'so01',th:'ต้มยำทะเลน้ำใส / น้ำข้น (ถ้วย)',en:'Seafood Tom Yum Clear / Creamy (Bowl)',price:'160'},
+    {id:'so02',th:'ต้มยำทะเล น้ำใส / น้ำข้น (หม้อไฟ)',en:'Seafood Tom Yum Clear / Creamy (Hot Pot)',price:'380'},
+    {id:'so03',th:'ต้มยำปลากระพงน้ำข้น / น้ำใส (ถ้วย)',en:'Barramundi Tom Yum Clear / Creamy (Bowl)',price:'160'},
+    {id:'so04',th:'ต้มยำปลากระพงน้ำข้น / น้ำใส (หม้อไฟ)',en:'Barramundi Tom Yum Clear / Creamy (Hot Pot)',price:'380'},
+    {id:'so05',th:'ต้มยำปลาทับทิมน้ำข้น / น้ำใส (หม้อไฟ)',en:'Red Tilapia Tom Yum Clear / Creamy (Hot Pot)',price:'380'},
+    {id:'so06',th:'แกงจืดเต้าหู้ สาหร่าย หมูสับ',en:'Clear Soup with Tofu, Seaweed & Minced Pork',price:'130'},
+    {id:'so07',th:'แกงจืดวุ้นเส้น เต้าหู้ หมูสับ',en:'Clear Soup with Glass Noodle, Tofu & Minced Pork',price:'130'},
+    {id:'so08',th:'ต้มเกี๊ยมฉ่ายหมูสับ (ต้มผู้กอง)',en:"Salted Vegetable & Pork Soup (Commander's Soup)",price:'130'},
+    {id:'so09',th:'ต้มแซ่บซี่โครงหมู',en:'Spicy Pork Rib Soup',price:'150'},
+    {id:'so10',th:'ต้มแซ่บซี่โครงหมู (หม้อไฟกลาง / ใหญ่)',en:'Spicy Pork Rib Soup (Medium / Large Hot Pot)',price:'280 / 360',portion:'กลาง / ใหญ่'},
+    {id:'so11',th:'ต้มยำไก่',en:'Chicken Tom Yum',price:'140'},
+    {id:'so12',th:'ต้มยำไก่ (หม้อไฟกลาง / ใหญ่)',en:'Chicken Tom Yum (Medium / Large Hot Pot)',price:'250 / 330',portion:'กลาง / ใหญ่'},
+    {id:'so13',th:'ต้มข่าไก่',en:'Chicken Galangal Soup',price:'150'},
+    {id:'so14',th:'ต้มข่าไก่ (หม้อไฟกลาง / ใหญ่)',en:'Chicken Galangal Soup (Medium / Large Hot Pot)',price:'280 / 360',portion:'กลาง / ใหญ่'},
+    {id:'so15',th:'เนื้อตุ๋น (หม้อไฟเล็ก)',en:'Braised Beef Small Hot Pot',price:'180'},
+  ],
+  salad: [
+    {id:'sa01',th:'ยำวุ้นเส้นโบราณ',en:'Traditional Glass Noodle Salad',price:'120'},
+    {id:'sa02',th:'ยำวุ้นเส้นทะเล',en:'Seafood Glass Noodle Salad',price:'150'},
+    {id:'sa03',th:'ยำรวมมิตรทะเล',en:'Mixed Seafood Salad',price:'160'},
+    {id:'sa04',th:'กุ้งแช่น้ำปลา',en:'Shrimp in Fish Sauce',price:'160'},
+    {id:'sa05',th:'พล่ากุ้ง',en:'Spicy Shrimp Salad',price:'160'},
+    {id:'sa06',th:'ยำผักบุ้งทอดกรอบหมูสับ',en:'Crispy Morning Glory Salad with Minced Pork',price:'140'},
+    {id:'sa07',th:'ยำผักบุ้งทอดกรอบกุ้งสับ',en:'Crispy Morning Glory Salad with Minced Shrimp',price:'160'},
+    {id:'sa08',th:'หมูมะนาว',en:'Pork with Lime Dressing',price:'140'},
+    {id:'sa09',th:'ยำไข่เยี่ยวม้า',en:'Century Egg Salad',price:'130'},
+    {id:'sa10',th:'ยำหมูยอ',en:'Pork Sausage Salad',price:'130'},
+    {id:'sa11',th:'พล่าเนื้อมะเขือเปราะ',en:'Spicy Beef with Thai Eggplant',price:'150'},
+    {id:'sa12',th:'ยำมะเขือยาวหมูสับ',en:'Eggplant Salad with Minced Pork',price:'140'},
+    {id:'sa13',th:'ยำสามกรอบ',en:'Three-Crispy Salad',price:'160'},
+    {id:'sa14',th:'ยำไข่ดาว หมูสับ',en:'Fried Egg Salad with Minced Pork',price:'130'},
+    {id:'sa15',th:'ยำหมูสามชั้น',en:'Pork Belly Salad',price:'140'},
+    {id:'sa16',th:'ยำกุนเชียง',en:'Chinese Sausage Salad',price:'130'},
+  ],
+  stirfry: [
+    {id:'st01',th:'แกงเหลืองปลากระพง ยอดมะพร้าวอ่อน (ถ้วย / หม้อไฟ)',en:'Yellow Curry Barramundi with Young Coconut Shoot (Bowl / Hot Pot)',price:'160 / 380',portion:'ถ้วย / หม้อไฟ'},
+    {id:'st02',th:'แกงเหลืองกุ้งยอดมะพร้าวอ่อน (ถ้วย / หม้อไฟ)',en:'Yellow Curry Shrimp with Young Coconut Shoot (Bowl / Hot Pot)',price:'150 / 350',portion:'ถ้วย / หม้อไฟ'},
+    {id:'st03',th:'เนื้อปลากระพงผัดฉ่า',en:'Barramundi Pad Cha (Stir-fried with Herbs)',price:'190 / 380',portion:'ราคาตามน้ำหนัก'},
+    {id:'st04',th:'เนื้อปลากระพงผัดขึ้นฉ่าย',en:'Barramundi Stir-fried with Celery',price:'190 / 380',portion:'ราคาตามน้ำหนัก'},
+    {id:'st05',th:'ผัดเนื้อน้ำมันหอย',en:'Beef with Oyster Sauce',price:'150'},
+    {id:'st06',th:'ผัดเนื้อพริกไทยดำ',en:'Beef with Black Pepper',price:'150'},
+    {id:'st07',th:'ผัดหมูพริกขี้หนู',en:"Pork with Bird's Eye Chili",price:'130'},
+    {id:'st08',th:'ผัดผงกระหรี่ทะเล',en:'Seafood Curry Stir-fry',price:'220'},
+    {id:'st09',th:'ผัดกระเพราไก่',en:'Chicken Holy Basil Stir-fry',price:'130'},
+    {id:'st10',th:'ผัดกระเพราหมู',en:'Pork Holy Basil Stir-fry',price:'130'},
+    {id:'st11',th:'ผัดกระเพราทะเล',en:'Seafood Holy Basil Stir-fry',price:'180'},
+    {id:'st12',th:'ผัดกระเพราเนื้อ',en:'Beef Holy Basil Stir-fry',price:'150'},
+    {id:'st13',th:'ผัดไก่เม็ดมะม่วงหิมพานต์',en:'Chicken with Cashew Nuts',price:'150'},
+    {id:'st14',th:'ผัดกุ้งเม็ดมะม่วงหิมพานต์',en:'Shrimp with Cashew Nuts',price:'180'},
+  ],
+  vegstirfry: [
+    {id:'vs01',th:'ผัดยอดมะพร้าวอ่อนกุ้ง',en:'Young Coconut Shoot Stir-fry with Shrimp',price:'150'},
+    {id:'vs02',th:'บล็อคโคลี่ผัดกุ้ง / หมูกรอบ',en:'Broccoli Stir-fry with Shrimp / Crispy Pork',price:'130'},
+    {id:'vs03',th:'ผัดคะน้าน้ำมันหอย',en:'Chinese Kale with Oyster Sauce',price:'90'},
+    {id:'vs04',th:'ผัดผักรวมมิตรน้ำมันหอย',en:'Mixed Vegetables with Oyster Sauce',price:'100'},
+    {id:'vs05',th:'ผัดคะน้าหมูกรอบ',en:'Chinese Kale with Crispy Pork',price:'130'},
+    {id:'vs06',th:'ผัดคะน้าปลาเค็ม',en:'Chinese Kale with Salted Fish',price:'130'},
+    {id:'vs07',th:'ผัดเห็ดออรินจิกุ้ง / หมูกรอบ',en:'Eringi Mushroom Stir-fry with Shrimp / Crispy Pork',price:'130'},
+    {id:'vs08',th:'ผัดสามสหาย / ผัดสี่สหาย',en:'Three-friend / Four-friend Stir-fry',price:'120'},
+    {id:'vs09',th:'กะหล่ำปลีผัดน้ำปลา กุ้งแห้งทอด',en:'Cabbage with Fish Sauce & Crispy Dried Shrimp',price:'100'},
+    {id:'vs10',th:'ผัดหน่อไม้ฝรั่งกุ้ง / หมูกรอบ',en:'Asparagus Stir-fry with Shrimp / Crispy Pork',price:'150'},
+    {id:'vs11',th:'ผัดเปรี้ยวหวานหมู / ไก่',en:'Sweet & Sour Pork / Chicken',price:'130'},
+    {id:'vs12',th:'ผัดเปรี้ยวหวานกุ้ง',en:'Sweet & Sour Shrimp',price:'160'},
+    {id:'vs13',th:'ผัดหนำเลี้ยบหมูสับ',en:'Preserved Mustard Stir-fry with Minced Pork',price:'130'},
+    {id:'vs14',th:'ผัดเกี้ยมฉ่ายหมูสับ',en:'Salted Vegetable Stir-fry with Minced Pork',price:'130'},
+    {id:'vs15',th:'ผัดมะเขือยาวหมูสับ',en:'Eggplant Stir-fry with Minced Pork',price:'130'},
+    {id:'vs16',th:'ผัดวุ้นเส้นกระหล่ำปลีหมูสับ',en:'Glass Noodle & Cabbage Stir-fry with Minced Pork',price:'130'},
+  ],
+  isaan: [
+    {id:'is01',th:'ส้มตำไทย',en:'Thai Papaya Salad',price:'70'},
+    {id:'is02',th:'ส้มตำปูปลาร้า',en:'Papaya Salad with Crab & Fermented Fish',price:'80'},
+    {id:'is03',th:'ส้มตำปูปลาร้า กุ้งสด',en:'Papaya Salad with Crab, Fermented Fish & Fresh Shrimp',price:'150'},
+    {id:'is04',th:'ตำซัวปูปลาร้า',en:'Tum Sua with Crab & Fermented Fish',price:'80'},
+    {id:'is05',th:'ตำหลวงพระบาง',en:'Luang Prabang Papaya Salad',price:'80'},
+    {id:'is06',th:'ตำป่า',en:'Wild-style Papaya Salad',price:'100'},
+    {id:'is07',th:'ตำป่ากุ้งสด',en:'Wild-style Papaya Salad with Fresh Shrimp',price:'150'},
+    {id:'is08',th:'ตำเส้นเล็กหมูยอ / ปลาร้า',en:'Tum Sen Lek with Pork Sausage / Fermented Fish',price:'120'},
+    {id:'is09',th:'ตำเส้นเล็กกุ้งสด',en:'Tum Sen Lek with Fresh Shrimp',price:'150'},
+    {id:'is10',th:'ตำแดงหมูยอ / ปลาร้า',en:'Red Papaya Salad with Pork Sausage / Fermented Fish',price:'120'},
+    {id:'is11',th:'ซุปหน่อไม้',en:'Bamboo Shoot Soup',price:'70'},
+    {id:'is12',th:'น้ำตกหมู',en:'Waterfall Pork',price:'130'},
+    {id:'is13',th:'น้ำตกเนื้อ',en:'Waterfall Beef',price:'150'},
+    {id:'is14',th:'ลาบหมู',en:'Minced Pork Laab',price:'120'},
+    {id:'is15',th:'ลาบหมูทอด',en:'Fried Pork Laab',price:'130'},
+    {id:'is16',th:'ลาบเนื้อ',en:'Minced Beef Laab',price:'130'},
+    {id:'is17',th:'คอหมูย่าง',en:'Grilled Pork Collar',price:'120'},
+    {id:'is18',th:'ก้อยเนื้อ / ก้อยขม',en:'Raw Beef Salad / Bitter Herb Salad',price:'130'},
+    {id:'is19',th:'เนื้อย่างจิ้มแจ่ว',en:'Grilled Beef with Jaew Sauce',price:'150'},
+    {id:'is20',th:'ลาบกุ้ง',en:'Shrimp Laab',price:'180'},
+    {id:'is21',th:'ลาบปลาหมึก',en:'Squid Laab',price:'150'},
+    {id:'is22',th:'ก้อยปลาแซลมอนมะนาว',en:'Salmon Salad with Lime',price:'290'},
+    {id:'is23',th:'เหลาแซลมอน (น้ำปลาร้า)',en:'Salmon with Fermented Fish Sauce',price:'290'},
+    {id:'is24',th:'เหลากุ้งสด (น้ำปลาร้า)',en:'Fresh Shrimp with Fermented Fish Sauce',price:'180'},
+    {id:'is25',th:'เหลารวมแซลมอน กุ้งสด (น้ำปลาร้า)',en:'Mixed Salmon & Fresh Shrimp with Fermented Fish Sauce',price:'290'},
+  ],
+  seafood: [
+    {id:'sf01',th:'กุ้งอบวุ้นเส้น',en:'Baked Shrimp with Glass Noodles',price:'250'},
+    {id:'sf02',th:'กุ้งทอดซอสมะขาม',en:'Fried Shrimp with Tamarind Sauce',price:'250'},
+    {id:'sf03',th:'กุ้งผัดพริกเกลือ',en:'Shrimp Stir-fried with Salt & Chili',price:'250'},
+    {id:'sf04',th:'กุ้งแช่น้ำปลา',en:'Shrimp in Fish Sauce',price:'160'},
+    {id:'sf05',th:'พล่ากุ้ง',en:'Spicy Shrimp Salad',price:'160'},
+    {id:'sf06',th:'กุ้งทอดเทมปุระ',en:'Shrimp Tempura',price:'180'},
+    {id:'sf07',th:'ปลากระพงทอดซอสมะขาม',en:'Fried Barramundi with Tamarind Sauce',price:'350 / 380',portion:'ราคาตามน้ำหนัก'},
+    {id:'sf08',th:'ปลากระพงทอดน้ำปลา',en:'Fried Barramundi with Fish Sauce',price:'350 / 380',portion:'ราคาตามน้ำหนัก'},
+    {id:'sf09',th:'ปลากระพงทอดขมิ้น',en:'Turmeric Fried Barramundi',price:'350 / 380',portion:'ราคาตามน้ำหนัก'},
+    {id:'sf10',th:'ปลากระพงนึ่งซีอิ๊ว',en:'Steamed Barramundi with Soy Sauce',price:'380'},
+    {id:'sf11',th:'ปลากระพงนึ่งมะนาว',en:'Steamed Barramundi with Lime',price:'380'},
+    {id:'sf12',th:'เนื้อปลากระพงลวกจิ้ม',en:'Poached Barramundi Fillet',price:'180 / 350',portion:'ราคาตามน้ำหนัก'},
+    {id:'sf13',th:'ผัดผงกระหรี่ทะเล',en:'Seafood Curry Stir-fry',price:'220'},
+    {id:'sf14',th:'ผัดกระเพราทะเล',en:'Seafood Holy Basil Stir-fry',price:'180'},
+    {id:'sf15',th:'ปลาหมึกผัดไข่เค็ม',en:'Squid with Salted Egg',price:'180'},
+    {id:'sf16',th:'ปลาหมึกผัดพริกสด',en:'Squid with Fresh Chili',price:'160'},
+    {id:'sf17',th:'ปลาหมึกคั่วพริกเกลือ',en:'Squid Stir-fried with Salt & Chili',price:'160'},
+    {id:'sf18',th:'ปลาหมึกย่าง',en:'Grilled Squid',price:'180 / 280',portion:'ราคาตามน้ำหนัก'},
+    {id:'sf19',th:'หมึกนึ่งมะนาว',en:'Steamed Squid with Lime',price:'350'},
+    {id:'sf20',th:'ปลาหมึกชุปแป้งทอด',en:'Battered Fried Squid',price:'160'},
+  ],
+  drinks: [
+    {id:'dr01',th:'น้ำดื่มสิงห์ (ขนาด 600ml)',en:'Singha Water 600ml',price:'15'},
+    {id:'dr02',th:'น้ำดื่มสิงห์ (ขนาด 1.25L)',en:'Singha Water 1.25L',price:'30'},
+    {id:'dr03',th:'โค้ก (กระป๋อง)',en:'Coke Can',price:'20'},
+    {id:'dr04',th:'โค้ก ซีโร่ (กระป๋อง)',en:'Coke Zero Can',price:'25'},
+    {id:'dr05',th:'โค้ก (ขวดใหญ่)',en:'Coke Large Bottle',price:'95'},
+    {id:'dr06',th:'แฟนต้า / สไปรท์ / โซดา',en:'Fanta / Sprite / Soda',price:'20'},
+    {id:'dr07',th:'สิงห์เลม่อนโซดา',en:'Singha Lemon Soda',price:'20'},
+    {id:'dr08',th:'เบียร์ช้าง / ลีโอ',en:'Chang / Leo Beer',price:'79'},
+    {id:'dr09',th:'เบียร์สิงห์',en:'Singha Beer',price:'89'},
+    {id:'dr10',th:'เบียร์ไฮเนเก้น',en:'Heineken Beer',price:'99'},
+    {id:'dr11',th:'เบียร์สด สิงห์ (แก้ว - Mug)',en:'Singha Draft Beer — Mug',price:'99'},
+    {id:'dr12',th:'เบียร์สด สิงห์ (เหยือก - Pitcher)',en:'Singha Draft Beer — Pitcher',price:'279'},
+    {id:'dr13',th:'แสงโสม / เมอริเดียน (แบน)',en:'SangSom / Meridian — Flat Bottle',price:'480'},
+    {id:'dr14',th:'แสงโสม / เมอริเดียน (กลม)',en:'SangSom / Meridian — Round Bottle',price:'690'},
+    {id:'dr15',th:'รีเจนซี่ (แบน)',en:'Regency — Flat Bottle',price:'490'},
+    {id:'dr16',th:'รีเจนซี่ (กลม)',en:'Regency — Round Bottle',price:'790'},
+  ],
+};
+
+let cart = [], currentLang = 'th', pendingItem = null;
+
+function renderAll() {
+  Object.keys(menuData).forEach(cat => {
+    const g = document.getElementById('grid-' + cat);
+    if (g) g.innerHTML = menuData[cat].map((item,i) => card(item,i+1)).join('');
+  });
+}
+
+function card(item, num) {
+  const primary = currentLang === 'en' ? (item.en || item.th) : item.th;
+  const secondary = currentLang === 'en' ? item.th : (item.en || '');
+  const portion = item.portion ? `<span class="item-portion">📦 ${item.portion}</span>` : '';
+  const thSafe = item.th.replace(/'/g,"\\'");
+  return `<div class="menu-item" data-th="${item.th}" data-en="${item.en||item.th}">
+    <div class="item-left">
+      <div class="item-number">No.${String(num).padStart(2,'0')}</div>
+      <div class="item-name-th">${primary}</div>
+      ${secondary ? `<div class="item-name-en">${secondary}</div>` : ''}
+      ${portion}
+    </div>
+    <div class="item-right">
+      <div class="item-price">${item.price}<span class="currency"> ฿</span></div>
+      <div class="item-actions">
+        <button class="btn-remark" onclick="openRemark('${item.id}','${thSafe}','${item.price}')">📝</button>
+        <button class="btn-add" onclick="addToCart('${item.id}','${thSafe}','${item.price}','')">+</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-th').classList.toggle('active', lang==='th');
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.querySelectorAll('[data-th]').forEach(el => {
+    if (el.closest('.menu-item')) return;
+    el.textContent = lang==='en' && el.dataset.en ? el.dataset.en : el.dataset.th;
+  });
+  document.getElementById('searchInput').placeholder = lang==='en' ? 'Search menu...' : 'ค้นหาเมนู... / Search menu...';
+  renderAll();
+  filterMenu(document.getElementById('searchInput').value);
+}
+
+function filterMenu(q) {
+  q = q.trim().toLowerCase();
+  let any = false;
+  document.querySelectorAll('.menu-item').forEach(el => {
+    const match = !q || (el.dataset.th||'').toLowerCase().includes(q) || (el.dataset.en||'').toLowerCase().includes(q);
+    el.classList.toggle('hidden', !match);
+    if (match) any = true;
+  });
+  document.querySelectorAll('.menu-section').forEach(s => {
+    s.classList.toggle('hidden', ![...s.querySelectorAll('.menu-item')].some(e => !e.classList.contains('hidden')));
+  });
+  document.getElementById('noResults').classList.toggle('hidden', any || !q);
+}
+
+function goTo(id) { document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
+
+function openRemark(id, name, price) {
+  pendingItem = {id, name, price};
+  document.getElementById('modalItemName').textContent = name;
+  document.getElementById('remarkText').value = '';
+  document.getElementById('remarkModal').classList.add('open');
+}
+function closeModal() { document.getElementById('remarkModal').classList.remove('open'); pendingItem = null; }
+function confirmAddToCart() {
+  if (!pendingItem) return;
+  addToCart(pendingItem.id, pendingItem.name, pendingItem.price, document.getElementById('remarkText').value.trim());
+  closeModal();
+}
+
+function addToCart(id, name, price, remark) {
+  const p = parseFloat(price.toString().split('/')[0].replace(/[^0-9.]/g,''));
+  cart.push({id, name, price:p, priceLabel:price, remark});
+  updateCart();
+  showToast(currentLang==='en' ? `Added: ${name}` : `เพิ่ม: ${name}`);
+}
+
+function updateCart() {
+  const n = cart.length;
+  document.getElementById('cartCount').textContent = n;
+  document.getElementById('cartFab').style.display = n > 0 ? 'flex' : 'none';
+  const body = document.getElementById('cartBody');
+  const footer = document.getElementById('cartFooter');
+  if (!n) {
+    body.innerHTML = `<div class="cart-empty">${currentLang==='en'?'No items yet':'ยังไม่มีรายการ'}</div>`;
+    footer.style.display = 'none'; return;
+  }
+  footer.style.display = 'block';
+  body.innerHTML = cart.map((item,i) => `
+    <div class="cart-item">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        ${item.remark ? `<div class="cart-item-remark">📝 ${item.remark}</div>` : ''}
+      </div>
+      <div class="cart-item-right">
+        <button onclick="removeFromCart(${i})" style="background:none;border:none;cursor:pointer;color:#ccc;font-size:14px;">✕</button>
+        <div class="cart-item-price">฿${item.price}</div>
+      </div>
+    </div>`).join('');
+  document.getElementById('cartTotal').textContent = '฿' + cart.reduce((s,i)=>s+i.price,0);
+}
+
+function removeFromCart(i) { cart.splice(i,1); updateCart(); }
+function clearCart() { cart=[]; updateCart(); }
+function toggleCart() { document.getElementById('cartDrawer').classList.toggle('open'); }
+function callStaffWithOrder() { showToast(currentLang==='en'?'🔔 Staff notified!':'🔔 เรียกพนักงานแล้ว!'); toggleCart(); }
+function callStaff() { showToast(currentLang==='en'?'🔔 Staff is on the way!':'🔔 กำลังเรียกพนักงาน...'); }
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+renderAll();
+</script>
+</body>
+</html>
